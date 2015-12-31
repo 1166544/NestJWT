@@ -32,8 +32,8 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="conf\db.js" />
-    <Compile Include="dao\userDao.js" />
-    <Compile Include="dao\userSqlMapping.js" />
+    <Compile Include="dao\user-dao.js" />
+    <Compile Include="dao\user-sql-mapping.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -47,7 +47,7 @@
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
     <Content Include="views\suc.jade" />
-    <Content Include="views\updateUser.jade" />
+    <Content Include="views\update-ser.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
