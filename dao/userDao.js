@@ -39,7 +39,12 @@ module.exports = {
                      code:200,
                      msg:"增加成功"
                    };
-               }
+                } else {
+                    result = {
+                      code: 404,
+                      msg:"插入失败" 
+                    }
+                }
 
                // 返回JSON形式结果
                jsonWrite(res, result);
