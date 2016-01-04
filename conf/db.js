@@ -1,3 +1,7 @@
+/**
+ * DB配置
+ * @type {{mysql: {host: string, user: string, password: string, database: string, port: number}}}
+ */
 module.exports = {
     mysql:{
         host:"localhost",
