@@ -1,4 +1,4 @@
-﻿//  监控用户登录时效，如果超进，则返回错误
+﻿//  监控用户APP端登录时效，如果超进，则返回错误
 
 // 登录用户列表
 var loginUserList = {};
@@ -7,9 +7,9 @@ var loginUserList = {};
 var expireTime = 3600 * 4 * 1000;
 
 module.exports = {
-    recordUserStatus : recordUserStatus,
-    removeUserStatus : removeUserStatus,
-    getUserStatus : getUserStatus
+    recordUserStatus : recordUserStatus,    // 记录用户状态
+    removeUserStatus : removeUserStatus,    // 移除用户状态    
+    getUserStatus : getUserStatus           // 查找用户登录状态
 }
 
 /** 记录用户状态 */

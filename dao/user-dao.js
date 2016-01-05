@@ -3,6 +3,7 @@ var mysql = require("mysql");
 var $conf = require("../conf/db");
 var $util = require("../util/util");
 var $sql = require("./user-sql-mapping");
+var $status = require('./user-login-status');
 
 // 建立连接池
 var pool = mysql.createPool($util.extend({}, $conf.mysql));
@@ -91,9 +92,20 @@ function queryByIdParser(req, res, next) {
  */
 function loginUserParser(req, res, next) {
     var parm = req.body;
-    if (parm.name == null || parm.password == null) {
+    var key;
+    var obj;
+    for (key in parm) {
+        if (key.indexOf('proto') == -1) {
+            obj = JSON.parse(key);
+        }
+    }
+    if (parm.name == null && parm.password == null && obj == null) {
         jsonWrite(res, undefined);
         return;
+    }
+    
+    if (obj != null) {
+        parm = obj;
     }
     
     pool.getConnection(updateConnection);
@@ -125,11 +137,16 @@ function loginUserParser(req, res, next) {
                 user = result[i];
                 if (user != null) {
                     if (user.password == parm.password) {
+
                         // 登录成功
                         rec.id = user.id;
                         rec.name = parm.name;
                         rec.code = true;
                         rec.msg = "登录成功";
+
+                        // 存取APP端登录状态
+                        $status.recordUserStatus(user);
+                        break;
                     }
                 }
             }
