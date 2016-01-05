@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 用户登录
+    form(method="post", action="/p/users/loginUser")
+        div.form-row
+            label
+                span UserName:
+                input(type="text", name="name")
+        div.form-row
+            label
+                span Password:
+                input(type="password", name="password")
+        div.form-row
+            input(type="submit")

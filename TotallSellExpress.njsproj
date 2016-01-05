@@ -33,11 +33,13 @@
     <Compile Include="app.js" />
     <Compile Include="conf\db.js" />
     <Compile Include="dao\user-dao.js" />
+    <Compile Include="dao\user-login-status.js" />
     <Compile Include="dao\user-sql-mapping.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Compile Include="util\util.js" />
+    <Content Include=".gitattributes" />
     <Content Include="log\access.log" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
@@ -47,7 +49,8 @@
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
     <Content Include="views\suc.jade" />
-    <Content Include="views\update-ser.jade" />
+    <Content Include="views\login-user.jade" />
+    <Content Include="views\update-user.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

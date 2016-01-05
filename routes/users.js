@@ -2,9 +2,15 @@ var express = require('express');
 var router = express.Router();
 var userDao = require('../dao/user-dao');
 
-/* GET users listing. */
+/* 监控更新用户信息输出 */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+    // res.send('respond with a resource');
+    res.render("update-user");
+});
+
+/* 监控用户登录输入 */
+router.get('/login', function (req, res, next) {
+    res.render("login-user");
 });
 
 /**
@@ -40,6 +46,13 @@ router.get("/deleteUser", function(req, res, next){
  */
 router.post("/updateUser", function(req, res, next){
     userDao.update(req, res, next);
+});
+
+/**
+ * 登录用户
+ */
+router.post("/loginUser", function (req, res, next) {
+    userDao.loginUser(req, res, next);
 });
 
 module.exports = router;

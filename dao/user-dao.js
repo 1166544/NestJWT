@@ -34,7 +34,12 @@ module.exports = {
     /**
      * 更新用户
      */
-    update:updateParser,
+    update: updateParser,
+    
+    /**
+     * 登录用户
+     */
+    loginUser: loginUserParser,
 
     /**
      * 依据ID查找用户
@@ -79,20 +84,97 @@ function queryByIdParser(req, res, next) {
 };
 
 /**
+ * 登录用户
+ * @param req
+ * @param res
+ * @param next
+ */
+function loginUserParser(req, res, next) {
+    var parm = req.body;
+    if (parm.name == null || parm.password == null) {
+        jsonWrite(res, undefined);
+        return;
+    }
+    
+    pool.getConnection(updateConnection);
+    
+    // 连接查询
+    function updateConnection(err, connection) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            connection.query($sql.loginUser, [parm.name], updateConnectResult);
+            connection.release();
+        }
+    }
+    
+    // 处理返回结果
+    function updateConnectResult(err, result) {
+        if (err) {
+            // 返回JSON形式结果
+            console.log(err);
+            jsonWrite(res, err);
+        }
+        else {
+            var user;
+            var i;
+            var total = result.length;
+            var rec = { id: 0, name: parm.name, code: false, msg: "登录失败" };
+            for (i = 0; i < total; i++) {
+                user = result[i];
+                if (user != null) {
+                    if (user.password == parm.password) {
+                        // 登录成功
+                        rec.id = user.id;
+                        rec.name = parm.name;
+                        rec.code = true;
+                        rec.msg = "登录成功";
+                    }
+                }
+            }
+            
+            // 返回JSON形式结果
+            jsonWrite(res, rec);
+        }
+    }
+};
+
+/**
  * 更新用户
  * @param req
  * @param res
  * @param next
  */
-function updateParser(req, res, next) {
+function updateParser(req, res, next) 
+{
     var parm = req.body;
     if (parm.name == null || parm.age == null || parm.id == null) {
         jsonWrite(res, undefined);
         return;
     }
     
-    pool.getConnection(function (err, connection) {
-        connection.query($sql.update, [parm.name, parm.age, parm.id], function (err, result) {
+    pool.getConnection(updateConnection);
+    
+    // 连接查询
+    function updateConnection(err, connection) 
+    {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            connection.query($sql.update, [parm.name, parm.age, parm.id], updateConnectResult);
+            connection.release();
+        }
+    }
+    
+    // 处理返回结果
+    function updateConnectResult(err, result) 
+    {
+        if (err) {
+            console.log(err);
+        }
+        else {
             // 使用页面进行跳转提示
             if (result.affectedRows > 0) {
                 res.render("suc", { result : result });
@@ -100,10 +182,8 @@ function updateParser(req, res, next) {
             else {
                 res.render("fail", { result : result });
             }
-        });
-        
-        connection.release();
-    });
+        }
+    }
 };
 
 /**
