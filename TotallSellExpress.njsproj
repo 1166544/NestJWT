@@ -32,9 +32,16 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="conf\db.js" />
+    <Compile Include="conf\code.js" />
     <Compile Include="dao\user-dao.js" />
-    <Compile Include="dao\user-login-status.js" />
-    <Compile Include="dao\user-sql-mapping.js" />
+    <Compile Include="dao\user\user-dao-add.js" />
+    <Compile Include="dao\user\user-dao-delete.js" />
+    <Compile Include="dao\user\user-dao-login.js" />
+    <Compile Include="dao\user\user-dao-query-all.js" />
+    <Compile Include="dao\user\user-dao-query.js" />
+    <Compile Include="dao\user\user-dao-update.js" />
+    <Compile Include="dao\user\user-login-status.js" />
+    <Compile Include="dao\user\user-sql-mapping.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -56,6 +63,7 @@
     <Folder Include="bin\" />
     <Folder Include="conf\" />
     <Folder Include="dao\" />
+    <Folder Include="dao\user\" />
     <Folder Include="log\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />

@@ -16,7 +16,7 @@ router.get('/login', function (req, res, next) {
 /**
  * 增加用户
  */
-router.get("/addUser", function(req, res, next){
+router.post("/addUser", function(req, res, next){
     userDao.add(req, res, next);
 });
 
