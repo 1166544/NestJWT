@@ -1,12 +1,12 @@
 ﻿var mysql = require("mysql");
-var $conf = require("../../conf/db");
-var $code = require("../../conf/code");
-var $util = require("../../util/util");
-var $sql = require("./user-sql-mapping");
-var $status = require('./user-login-status');
+var conf = require("../../conf/db");
+var code = require("../../conf/code");
+var util = require("../../util/util");
+var sql = require("./user-sql-mapping");
+var status = require('./user-login-status');
 
 // 连接池
-var pool = mysql.createPool($util.extend({}, $conf.mysql));
+var pool = mysql.createPool(util.extend({}, conf.mysql));
 
 module.exports = {
     updateParser : updateParser
@@ -21,7 +21,7 @@ module.exports = {
 function updateParser(req, res, next) {
     var parm = req.body;
     if (parm.name == null || parm.age == null || parm.id == null) {
-        $util.jsonWrite(res, undefined);
+        util.jsonWrite(res, undefined);
         return;
     }
     
@@ -33,7 +33,7 @@ function updateParser(req, res, next) {
             console.log(err);
         }
         else {
-            connection.query($sql.update, [parm.name, parm.age, parm.id], updateConnectResult);
+            connection.query(sql.update, [parm.name, parm.age, parm.id], updateConnectResult);
             connection.release();
         }
     }

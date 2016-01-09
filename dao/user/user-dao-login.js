@@ -1,12 +1,12 @@
 ﻿var mysql = require("mysql");
-var $conf = require("../../conf/db");
-var $code = require("../../conf/code");
-var $util = require("../../util/util");
-var $sql = require("./user-sql-mapping");
-var $status = require('./user-login-status');
+var conf = require("../../conf/db");
+var code = require("../../conf/code");
+var util = require("../../util/util");
+var sql = require("./user-sql-mapping");
+var status = require('./user-login-status');
 
 // 连接池
-var pool = mysql.createPool($util.extend({}, $conf.mysql));
+var pool = mysql.createPool(util.extend({}, conf.mysql));
 
 module.exports = {
     loginUserParser : loginUserParser
@@ -24,12 +24,12 @@ function loginUserParser(req, res, next) {
     var key;
     var obj;
     for (key in parm) {
-        if (key.indexOf($code.PROTO) == -1) {
+        if (key.indexOf(code.PROTO) == -1) {
             obj = JSON.parse(key);
         }
     }
     if (parm.name == null && parm.password == null && obj == null) {
-        $util.jsonWrite(res, undefined);
+        util.jsonWrite(res, undefined);
         return;
     }
     
@@ -45,7 +45,7 @@ function loginUserParser(req, res, next) {
             console.log(err);
         }
         else {
-            connection.query($sql.loginUser, [parm.name], updateConnectResult);
+            connection.query(sql.loginUser, [parm.name], updateConnectResult);
             connection.release();
         }
     }
@@ -55,14 +55,14 @@ function loginUserParser(req, res, next) {
         if (err) {
             // 返回JSON形式结果
             console.log(err);
-            $util.jsonWrite(res, err);
+            util.jsonWrite(res, err);
         }
         else {
             var user;
             var i;
             var total = result.length;
             
-            var rec = $code.LOGIN_FAIL;
+            var rec = code.LOGIN_FAIL;
             rec.id = 0;
             rec.name = parm.name;
 
@@ -72,19 +72,19 @@ function loginUserParser(req, res, next) {
                     if (user.password == parm.password) {
                         
                         // 登录成功
-                        rec = $code.LOGIN_SUCCESS;
+                        rec = code.LOGIN_SUCCESS;
                         rec.id = user.id;
                         rec.name = parm.name;
                         
                         // 存取APP端登录状态
-                        $status.recordUserStatus(user);
+                        status.recordUserStatus(user);
                         break;
                     }
                 }
             }
             
             // 返回JSON形式结果
-            $util.jsonWrite(res, rec);
+            util.jsonWrite(res, rec);
         }
     }
 };

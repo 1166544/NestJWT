@@ -35,6 +35,9 @@
     <Compile Include="conf\code.js" />
     <Compile Include="dao\cart-dao.js" />
     <Compile Include="dao\dash-dao.js" />
+    <Compile Include="dao\dash\dash-dao-side-item.js" />
+    <Compile Include="dao\dash\dash-dao-type-list.js" />
+    <Compile Include="dao\dash\dash-sql-maping.js" />
     <Compile Include="dao\profile-dao.js" />
     <Compile Include="dao\social-dao.js" />
     <Compile Include="dao\user-dao.js" />

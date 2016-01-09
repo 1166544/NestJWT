@@ -1,9 +1,9 @@
-var $userAdd = require("./user/user-dao-add");
-var $userDelete = require("./user/user-dao-delete");
-var $userUpdate = require('./user/user-dao-update');
-var $userLogin = require('./user/user-dao-login');
-var $userQuery = require('./user/user-dao-query');
-var $userQueryAll = require('./user/user-dao-query-all');
+var userAdd = require("./user/user-dao-add");
+var userDelete = require("./user/user-dao-delete");
+var userUpdate = require('./user/user-dao-update');
+var userLogin = require('./user/user-dao-login');
+var userQuery = require('./user/user-dao-query');
+var userQueryAll = require('./user/user-dao-query-all');
 
 /* 用户模块DAO操作 */
 module.exports = {
@@ -11,30 +11,30 @@ module.exports = {
     /**
      * 增加用户
      */
-    add : $userAdd.addParser,
+    add : userAdd.addParser,
 
     /**
      * 删除用户
      */
-    delete : $userDelete.deleteParser,
+    delete : userDelete.deleteParser,
 
     /**
      * 更新用户
      */
-    update : $userUpdate.updateParser,
+    update : userUpdate.updateParser,
     
     /**
      * 登录用户
      */
-    loginUser: $userLogin.loginUserParser,
+    loginUser: userLogin.loginUserParser,
 
     /**
      * 依据ID查找用户
      */
-    queryById : $userQuery.queryByIdParser,
+    queryById : userQuery.queryByIdParser,
 
     /**
      * 查找所有用户
      */
-    queryAll : $userQueryAll.queryAllParser
+    queryAll : userQueryAll.queryAllParser
 };

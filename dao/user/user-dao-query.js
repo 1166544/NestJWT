@@ -1,12 +1,12 @@
 ﻿var mysql = require("mysql");
-var $conf = require("../../conf/db");
-var $code = require("../../conf/code");
-var $util = require("../../util/util");
-var $sql = require("./user-sql-mapping");
-var $status = require('./user-login-status');
+var conf = require("../../conf/db");
+var code = require("../../conf/code");
+var util = require("../../util/util");
+var sql = require("./user-sql-mapping");
+var status = require('./user-login-status');
 
 // 连接池
-var pool = mysql.createPool($util.extend({}, $conf.mysql));
+var pool = mysql.createPool(util.extend({}, conf.mysql));
 
 module.exports = {
     queryByIdParser : queryByIdParser
@@ -21,8 +21,8 @@ module.exports = {
 function queryByIdParser(req, res, next) {
     var id = req.query.id;
     pool.getConnection(function (err, connection) {
-        connection.query($sql.queryById, id, function (err, result) {
-            $util.jsonWrite(res, result);
+        connection.query(sql.queryById, id, function (err, result) {
+            util.jsonWrite(res, result);
             connection.release();
         });
     });

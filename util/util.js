@@ -14,7 +14,7 @@ module.exports = {
     /* 向前台返回JSON方法封装 */
     jsonWrite:function (res, ret) {
         if (typeof ret === undefined) {
-            res.json($code.OPERATE_FAIL);
+            res.json(code.OPERATE_FAIL);
         } else {
             res.json(ret);
         }
