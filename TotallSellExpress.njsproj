@@ -33,6 +33,10 @@
     <Compile Include="app.js" />
     <Compile Include="conf\db.js" />
     <Compile Include="conf\code.js" />
+    <Compile Include="dao\cart-dao.js" />
+    <Compile Include="dao\dash-dao.js" />
+    <Compile Include="dao\profile-dao.js" />
+    <Compile Include="dao\social-dao.js" />
     <Compile Include="dao\user-dao.js" />
     <Compile Include="dao\user\user-dao-add.js" />
     <Compile Include="dao\user\user-dao-delete.js" />
@@ -42,7 +46,11 @@
     <Compile Include="dao\user\user-dao-update.js" />
     <Compile Include="dao\user\user-login-status.js" />
     <Compile Include="dao\user\user-sql-mapping.js" />
+    <Compile Include="routes\cart.js" />
+    <Compile Include="routes\dash.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\profile.js" />
+    <Compile Include="routes\social.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Compile Include="util\util.js" />
@@ -64,6 +72,10 @@
     <Folder Include="bin\" />
     <Folder Include="conf\" />
     <Folder Include="dao\" />
+    <Folder Include="dao\cart\" />
+    <Folder Include="dao\dash\" />
+    <Folder Include="dao\social\" />
+    <Folder Include="dao\profile\" />
     <Folder Include="dao\user\" />
     <Folder Include="log\" />
     <Folder Include="public\" />

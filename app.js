@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var cart = require('./routes/cart');
+var dash = require('./routes/dash');
+var profile = require('./routes/profile');
+var social = require('./routes/social');
 
 var app = express();
 
@@ -40,6 +44,10 @@ app.use(logger('combined', {stream: accessLogStream}));
 // 自定义cgi路径路由
 app.use('/', routes);
 app.use('/p/users', users);
+app.use('/p/cart', cart);
+app.use('/p/dash', dash);
+app.use('/p/profile', profile);
+app.use('/p/social', social);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
