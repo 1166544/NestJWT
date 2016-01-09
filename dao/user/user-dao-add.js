@@ -4,7 +4,6 @@ var $code = require("../../conf/code");
 var $util = require("../../util/util");
 var $sql = require("./user-sql-mapping");
 var $status = require('./user-login-status');
-var $loginDao = require('./user-dao-login');
 
 // 连接池
 var pool = mysql.createPool($util.extend({}, $conf.mysql));
@@ -45,7 +44,6 @@ function addParser(req, res, next) {
         
         // 检测有无用户重名
         connection.query($sql.loginUser, [parm.firstName], checkUserResult);
-        connection.release();
         
         // 处理返回结果
         function checkUserResult(err, result) {
@@ -53,6 +51,7 @@ function addParser(req, res, next) {
                 // 返回JSON形式结果
                 console.log(err);
                 $util.jsonWrite(res, err);
+                connection.release();
                 return;
             }
             else {
@@ -60,6 +59,7 @@ function addParser(req, res, next) {
                     // 通知客户端重名错误
                     err = $code.USER_EXISTS;
                     $util.jsonWrite(res, err);
+                    connection.release();
                     return;
                 }
                 else {
@@ -77,24 +77,53 @@ function addParser(req, res, next) {
         function connectionResult(err, result) {
             if (result) {
                 result = $code.INSERT_SUCCESS;
+                connection.query($sql.loginUser, [parm.firstName], onQueryUserResult);
             } else {
                 result = $code.INSERT_FAIL;
+                $util.jsonWrite(res, err);
+                connection.release();
+            }
+            
+            // 处理返回结果
+            function onQueryUserResult(err, result) {
+                if (err) {
+                    // 返回JSON形式结果
+                    console.log(err);
+                    $util.jsonWrite(res, err);
+                    connection.release();
+                }
+                else {
+                    var user;
+                    var i;
+                    var total = result.length;
+                    
+                    var rec = $code.LOGIN_FAIL;
+                    rec.id = 0;
+                    rec.name = parm.firstName;
+                    
+                    for (i = 0; i < total; i++) {
+                        user = result[i];
+                        if (user != null) {
+                            if (user.password == parm.password) {
+                                
+                                // 登录成功
+                                rec = $code.LOGIN_SUCCESS;
+                                rec.id = user.id;
+                                rec.name = parm.firstName;
+                                
+                                // 存取APP端登录状态
+                                $status.recordUserStatus(user);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // 返回JSON形式结果
+                    $util.jsonWrite(res, rec);
+                    connection.release();
+                }
             }
 
-            //// 包装登录成功数据
-            //result.id = user.id;
-            //result.name = parm.name;
-            
-            //// 返回JSON形式结果
-            //$util.jsonWrite(res, result);
-            
-            // 释放连接
-            connection.release();
-
-            // 调用登录流程
-            if (result === $code.INSERT_FAIL) {
-                $loginDao.loginUserParser(req, res, next);
-            }
         }
     }
 };

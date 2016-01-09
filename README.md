@@ -12,4 +12,5 @@
 
     修改 http://localhost:1337/p/users，会返回一个页面。通过表单模拟一个post请求
 	登录 http://localhost:1337/p/users/login，会返回一个页面。通过表单模拟一个post请求
+	新增 http://localhost:1337/p/users/add，会返回一个页面。通过表单模拟一个post请求
 	POST http://localhost:1337/p/users/loginUser

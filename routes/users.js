@@ -13,6 +13,11 @@ router.get('/login', function (req, res, next) {
     res.render("login-user");
 });
 
+/* 监控增加用户输入 */
+router.get('/add', function (req, res, next) {
+    res.render("add-user");
+});
+
 /**
  * 增加用户
  */

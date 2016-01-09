@@ -1,0 +1,31 @@
+﻿extends layout
+
+block content
+    h1 新增用户
+    form(method="post", action="/p/users/addUser")
+        div.form-row
+            label
+                span firstName:
+                input(type="text", name="firstName")
+        div.form-row
+            label
+                span lastName:
+                input(type="text", name="lastName")
+        div.form-row
+            label
+                span password:
+                input(type="text", name="password")
+        div.form-row
+            label
+                span email:
+                input(type="text", name="email")
+        div.form-row
+            label
+                span phone:
+                input(type="text", name="phone")
+        div.form-row
+            label
+                span address:
+                input(type="text", name="address")
+        div.form-row
+            input(type="submit")
