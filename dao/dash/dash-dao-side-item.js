@@ -4,9 +4,6 @@ var code = require("../../conf/code");
 var util = require("../../util/util");
 var sql = require("./dash-sql-maping");
 
-// 连接池
-var pool = mysql.createPool(util.extend({}, conf.mysql));
-
 module.exports = {
     getSideItemData : getSideItemData
 }
@@ -18,9 +15,10 @@ module.exports = {
  * @param next
  */
 function getSideItemData(req, res, next) {
-    var type = req.query.type;
+    var type = req.query.direction;
     if (type === "top") {
         // 顶部数据
+        var pool = mysql.createPool(util.extend({}, conf.mysql));
         pool.getConnection(function (err, connection) {
             connection.query(sql.querySideItemTopData, function (err, result) {
                 util.jsonWrite(res, result);
@@ -30,6 +28,7 @@ function getSideItemData(req, res, next) {
     }
     else {
         // 底部数据
+        var pool = mysql.createPool(util.extend({}, conf.mysql));
         pool.getConnection(function (err, connection) {
             connection.query(sql.querySideItemBottomData, function (err, result) {
                 util.jsonWrite(res, result);
