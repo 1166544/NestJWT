@@ -11,13 +11,13 @@ var user = {
     delete: "DELETE FROM user WHERE id=?",
     
     // 查询BY ID
-    queryById: "SELECT * FROM user where id=?",
+    queryById: "SELECT * FROM user WHERE id=?",
     
     // 查询所有
     queryAll: "SELECT * FROM user",
 
     // 用户登录
-    loginUser: "SELECT id, name, password FROM user where name=?",
+    loginUser: "SELECT id, name, password FROM user WHERE name=?",
 };
 
 module.exports = user;

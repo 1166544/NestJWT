@@ -43,6 +43,7 @@ function loginUserParser(req, res, next) {
     function updateConnection(err, connection) {
         if (err) {
             console.log(err);
+            connection.release();
         }
         else {
             connection.query(sql.loginUser, [parm.name], updateConnectResult);
