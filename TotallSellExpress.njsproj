@@ -41,6 +41,9 @@
     <Compile Include="dao\dash\dash-dao-type-list.js" />
     <Compile Include="dao\dash\dash-sql-maping.js" />
     <Compile Include="dao\profile-dao.js" />
+    <Compile Include="dao\profile\profile-dao-update.js" />
+    <Compile Include="dao\profile\profile-dao-user.js" />
+    <Compile Include="dao\profile\profile-sql-maping.js" />
     <Compile Include="dao\social-dao.js" />
     <Compile Include="dao\social\social-list.js" />
     <Compile Include="dao\social\social-min.js" />

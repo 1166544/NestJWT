@@ -18,6 +18,10 @@ var user = {
 
     // 用户登录
     loginUser: "SELECT id, name, password FROM user WHERE name=?",
+
+    // 插入用户设置
+    insertProfile: "INSERT INTO user_profile(id, userId, callEnable, messageEnable, geoEnable) VALUES(0, ?, ?, ?, ?)"
+
 };
 
 module.exports = user;

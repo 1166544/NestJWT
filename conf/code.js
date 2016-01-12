@@ -36,5 +36,10 @@ module.exports = {
     USER_EXISTS: {
         code: 207,
         msg: "用户已存在"
+    },
+    
+    OPERATE_SUCCESS: {
+        code: 208,
+        msg: "操作成功"
     }
 }

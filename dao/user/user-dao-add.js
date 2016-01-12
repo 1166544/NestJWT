@@ -84,7 +84,7 @@ function addParser(req, res, next) {
                 connection.release();
             }
             
-            // 处理返回结果
+            // 处理插入用户返回结果
             function onQueryUserResult(err, result) {
                 if (err) {
                     // 返回JSON形式结果
@@ -120,7 +120,25 @@ function addParser(req, res, next) {
                     
                     // 返回JSON形式结果
                     util.jsonWrite(res, rec);
-                    connection.release();
+                    
+                    // 向PROFILE表插入默认设置
+                    connection.query(sql.loginUser, [rec.id, 1, 1, 1], onQueryProfileResult);
+                    
+                    // 向PROFILE表插入默认设置结果处理
+                    function onQueryProfileResult(err, result) {
+                        if (err) {
+                            // 返回JSON形式结果
+                            console.log(err);
+                            util.jsonWrite(res, err);
+                            connection.release();
+                        }
+                        else {
+                            console.log("插入设置成功");
+                            connection.release();
+                        }
+                    }
+
+
                 }
             }
 
