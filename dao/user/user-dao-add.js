@@ -122,7 +122,7 @@ function addParser(req, res, next) {
                     util.jsonWrite(res, rec);
                     
                     // 向PROFILE表插入默认设置
-                    connection.query(sql.loginUser, [rec.id, 1, 1, 1], onQueryProfileResult);
+                    connection.query(sql.insertProfile, [rec.id, 1, 1, 1], onQueryProfileResult);
                     
                     // 向PROFILE表插入默认设置结果处理
                     function onQueryProfileResult(err, result) {

@@ -52,7 +52,17 @@ function updateProfile(req, res, next) {
         // user_profile.messageEnable=?, 
         // user_profile.geoEnable=? 
         // user.id=?
-        connection.query(sql.updateUser, [parm.name, parm.lastName, parm.email, parm.phone, parm.address, parm.id, parm.callEnable, parm.messageEnable, parm.geoEnable, parm.id], updateUserResult);
+        var values = [
+            parm.name, 
+            parm.lastName, 
+            parm.email, 
+            parm.phone, 
+            parm.address, 
+            parm.callEnable, 
+            parm.messageEnable, 
+            parm.geoEnable,
+            parm.id];
+        connection.query(sql.updateUser, values, updateUserResult);
         
         // 处理更新USER返回结果
         function updateUserResult(err, result) {

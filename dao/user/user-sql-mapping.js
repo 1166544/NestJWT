@@ -5,7 +5,7 @@ var user = {
     insert: "INSERT INTO user(id, name, lastName, password, email, phone, address) VALUES(0, ?, ?, ?, ?, ?, ?)",
     
     // 更新数据
-    update: "UPDATE user set name=?, age=? WHERE id=?",
+    update: "UPDATE user SET name=?, age=? WHERE id=?",
     
     // 删除数据
     delete: "DELETE FROM user WHERE id=?",
