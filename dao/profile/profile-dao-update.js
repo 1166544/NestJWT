@@ -43,34 +43,29 @@ function updateProfile(req, res, next) {
         }
         
         // 更新USER
-        connection.query(sql.updateUser, [parm.name, parm.lastName, parm.email, parm.phone, parm.address, parm.id], updateUserResult);
+        // user.name=?, 
+        // user.lastName=?, 
+        // user.email=?, 
+        // user.phone=?, 
+        // user.address=?, 
+        // user_profile.callEnable=?, 
+        // user_profile.messageEnable=?, 
+        // user_profile.geoEnable=? 
+        // user.id=?
+        connection.query(sql.updateUser, [parm.name, parm.lastName, parm.email, parm.phone, parm.address, parm.id, parm.callEnable, parm.messageEnable, parm.geoEnable, parm.id], updateUserResult);
         
         // 处理更新USER返回结果
         function updateUserResult(err, result) {
-            if (err) {
-                console.log(err);
-                connection.release();
-            }
-            else {
-                // 更新USER_PROFILE
-                connection.query(sql.updateProfile, [parm.callEnable, parm.messageEnable, parm.geoEnable, parm.id], updateUserProfileResult);
-
-                // 处理更新USER_PROFILE返回结果
-                function updateUserProfileResult(err, result) {
-                    if (err) {
-                        console.log(err);
-                        connection.release();
-                    }
-                    else {
-                        // 返回JSON形式结果
-                        var rec = code.OPERATE_SUCCESS;
-                        util.jsonWrite(res, rec);
-                        connection.release();
-                    }
-                }
+        if (err) {
+            console.log(err);
+            connection.release();
+        }
+        else {
+            // 返回JSON形式结果
+            util.jsonWrite(res, code.OPERATE_SUCCESS);
+            connection.release();
             }
         }
 
-        
     }
 }
