@@ -5,7 +5,7 @@ var util = require("../../util/util");
 var sql = require("./user-sql-mapping");
 var status = require('./user-login-status');
 
-// 连接池
+// 建立连接
 var pool = mysql.createPool(util.extend({}, conf.mysql));
 
 module.exports = {

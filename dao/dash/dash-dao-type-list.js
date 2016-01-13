@@ -4,7 +4,7 @@ var code = require("../../conf/code");
 var util = require("../../util/util");
 var sql = require('./dash-sql-maping');
 
-// 连接池
+// 建立连接
 var pool = mysql.createPool(util.extend({}, conf.mysql));
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
  */
 function getTypeListData(req, res, next) {
     pool.getConnection(function (err, connection) {
-        connection.query(sql.queryTypeListData, function (err, result) {
+        connection.query(sql.queryTypeListData, 2, function (err, result) {
             util.jsonWrite(res, result);
             connection.release();
         });

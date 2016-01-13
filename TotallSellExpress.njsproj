@@ -34,6 +34,10 @@
     <Compile Include="conf\db.js" />
     <Compile Include="conf\code.js" />
     <Compile Include="dao\cart-dao.js" />
+    <Compile Include="dao\cart\cart-dao-product-detail.js" />
+    <Compile Include="dao\cart\cart-dao-product-notes.js" />
+    <Compile Include="dao\cart\cart-dao-product.js" />
+    <Compile Include="dao\cart\cart-sql-maping.js" />
     <Compile Include="dao\dash-dao.js" />
     <Compile Include="dao\dash\dash-dao-about.js" />
     <Compile Include="dao\dash\dash-dao-contact.js" />

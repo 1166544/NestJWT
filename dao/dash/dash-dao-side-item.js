@@ -20,7 +20,7 @@ function getSideItemData(req, res, next) {
         // 顶部数据
         var pool = mysql.createPool(util.extend({}, conf.mysql));
         pool.getConnection(function (err, connection) {
-            connection.query(sql.querySideItemTopData, function (err, result) {
+            connection.query(sql.queryTypeListData, 0, function (err, result) {
                 util.jsonWrite(res, result);
                 connection.release();
             });
@@ -30,7 +30,7 @@ function getSideItemData(req, res, next) {
         // 底部数据
         var pool = mysql.createPool(util.extend({}, conf.mysql));
         pool.getConnection(function (err, connection) {
-            connection.query(sql.querySideItemBottomData, function (err, result) {
+            connection.query(sql.queryTypeListData, 1, function (err, result) {
                 util.jsonWrite(res, result);
                 connection.release();
             });
