@@ -20,13 +20,12 @@ module.exports = {
 function getCartData(req, res, next) {
     
     var userId = req.query.userId;
-    var productId = req.query.productId;
     pool.getConnection(onConnected);
     
     function onConnected(err, connection) {
-        connection.query(sql.getProductListData, [userId, productId], onListResult);
+        connection.query(sql.getCartData, userId, onListResult);
         
-        function onSideResult(err, result) {
+        function onListResult(err, result) {
             util.jsonWrite(res, result);
             connection.release();
         }

@@ -17,7 +17,7 @@ var cart = {
     getProductDetailSideData : "SELECT id, src, title, dsc FROM mall_product_side_show WHERE linkId=?",
     
     // 获取购物车数据
-    getCartData : "SELECT src, pName, pPrice FROM mall_main_list WHERE id=？ AS t1 INNER JOIN (SELECT id, size, color, quality, FROM cart) AS t2 WHERE t2.userId=? AND t1.id = t2.productId",
+    getCartData : "SELECT cart.id, cart.productId, cart.size, cart.color, cart.quality, mall_main_list.src, mall_main_list.pName, mall_main_list.pPrice FROM cart, mall_main_list WHERE cart.productId = mall_main_list.id AND cart.userId=?",
     
     // 添加购物车数据
     addCartData : "INSERT INTO cart (productId, userId, size, color, quality) VALUES (?, ?, ?, ?, ?)",
