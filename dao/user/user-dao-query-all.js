@@ -2,7 +2,7 @@
 var conf = require("../../conf/db");
 var code = require("../../conf/code");
 var util = require("../../util/util");
-var sql = require("./user-sql-mapping");
+var sql = require("./user-sql-maping");
 var status = require('./user-login-status');
 var dao = require('../../dao/user-dao');
 

@@ -8,33 +8,11 @@ var userQueryAll = require('./user/user-dao-query-all');
 /* 用户模块DAO操作 */
 module.exports = {
 
-    /**
-     * 增加用户
-     */
-    add : userAdd.addParser,
+    add         : userAdd.addParser,            // 增加用户
+    delete      : userDelete.deleteParser,      // 删除用户
+    update      : userUpdate.updateParser,      // 更新用户
+    loginUser   : userLogin.loginUserParser,    // 登录用户
+    queryById   : userQuery.queryByIdParser,    // 依据ID查找用户
+    queryAll    : userQueryAll.queryAllParser   // 查找所有用户
 
-    /**
-     * 删除用户
-     */
-    delete : userDelete.deleteParser,
-
-    /**
-     * 更新用户
-     */
-    update : userUpdate.updateParser,
-    
-    /**
-     * 登录用户
-     */
-    loginUser: userLogin.loginUserParser,
-
-    /**
-     * 依据ID查找用户
-     */
-    queryById : userQuery.queryByIdParser,
-
-    /**
-     * 查找所有用户
-     */
-    queryAll : userQueryAll.queryAllParser
 };

@@ -34,9 +34,14 @@
     <Compile Include="conf\db.js" />
     <Compile Include="conf\code.js" />
     <Compile Include="dao\cart-dao.js" />
+    <Compile Include="dao\cart\cart-dao-add.js" />
+    <Compile Include="dao\cart\cart-dao-clear.js" />
+    <Compile Include="dao\cart\cart-dao-delete.js" />
+    <Compile Include="dao\cart\cart-dao-get.js" />
     <Compile Include="dao\cart\cart-dao-product-detail.js" />
     <Compile Include="dao\cart\cart-dao-product-notes.js" />
     <Compile Include="dao\cart\cart-dao-product.js" />
+    <Compile Include="dao\cart\cart-dao-update.js" />
     <Compile Include="dao\cart\cart-sql-maping.js" />
     <Compile Include="dao\dash-dao.js" />
     <Compile Include="dao\dash\dash-dao-about.js" />
@@ -60,7 +65,7 @@
     <Compile Include="dao\user\user-dao-query.js" />
     <Compile Include="dao\user\user-dao-update.js" />
     <Compile Include="dao\user\user-login-status.js" />
-    <Compile Include="dao\user\user-sql-mapping.js" />
+    <Compile Include="dao\user\user-sql-maping.js" />
     <Compile Include="routes\cart.js" />
     <Compile Include="routes\dash.js" />
     <Compile Include="routes\index.js" />
