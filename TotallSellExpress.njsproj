@@ -33,6 +33,10 @@
     <Compile Include="app.js" />
     <Compile Include="conf\db.js" />
     <Compile Include="conf\code.js" />
+    <Compile Include="core\core-cross-domain.js" />
+    <Compile Include="core\core-error-404.js" />
+    <Compile Include="core\core-error-deploy.js" />
+    <Compile Include="core\core-error-dev.js" />
     <Compile Include="dao\cart-dao.js" />
     <Compile Include="dao\cart\cart-dao-add.js" />
     <Compile Include="dao\cart\cart-dao-clear.js" />
@@ -73,6 +77,8 @@
     <Compile Include="routes\social.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
+    <Compile Include="sockets\socket-consts.js" />
+    <Compile Include="sockets\socket-io-core.js" />
     <Compile Include="util\util.js" />
     <Content Include=".gitattributes" />
     <Content Include="log\access.log" />
@@ -98,6 +104,8 @@
     <Folder Include="dao\profile\" />
     <Folder Include="dao\user\" />
     <Folder Include="log\" />
+    <Folder Include="core\" />
+    <Folder Include="sockets\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />

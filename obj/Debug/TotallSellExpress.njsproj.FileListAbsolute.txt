@@ -1,2 +1,0 @@
-F:\H5Workstation\TotallSellExpress\obj\Debug\TotallSellExpress.njsprojResolveAssemblyReference.cache
-F:\H5Workstation\TotallSellExpress\bin\Microsoft.NodejsTools.WebRole.dll

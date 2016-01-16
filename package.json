@@ -19,6 +19,7 @@
     "debug": "~2.0.0",
     "jade": "~1.6.0",
     "stylus": "0.42.3",
-    "mysql": "latest"	
+    "mysql": "latest",
+    "socket.io": "1.4.4"	
   }
 }

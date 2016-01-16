@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -11,18 +13,18 @@ var cart = require('./routes/cart');
 var dash = require('./routes/dash');
 var profile = require('./routes/profile');
 var social = require('./routes/social');
+var socketAdapter = require('./sockets/socket-io-core');
+var socketConst = require('./sockets/socket-consts');
+var domain = require('./core/core-cross-domain');
+var error404 = require('./core/core-error-404');
+var errorDev = require('./core/core-error-dev');
+var errorDeploy = require('./core/core-error-deploy');
 
+// 主程序
 var app = express();
 
-//设置跨域访问
-app.all('*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
-    res.header("X-Powered-By", "james-remote");
-    res.header("Content-Type", "application/json;charset=utf-8");
-    next();
-});
+// 设置跨域访问
+app.all('*', domain.setDomain);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,35 +52,22 @@ app.use('/p/profile', profile);
 app.use('/p/social', social);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+app.use(error404.parseError);
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+  app.use(errorDev.parseError);
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+app.use(errorDeploy.parseError);
 
+// SOCKET服务
+io.on(socketConst.SOCKET_CONNECT, socketAdapter.connectSocket);
+http.listen(socketConst.SOCKET_PORT, socketAdapter.listenSocket);
 
+// 输出应用程序
 module.exports = app;
