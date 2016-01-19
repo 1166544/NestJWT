@@ -1,6 +1,6 @@
-﻿var express = require('express');
-var router = express.Router();
-var socialDao = require('../dao/social-dao');
+﻿var express     = require('express');
+var socialDao   = require('../dao/social-dao');
+var router      = express.Router();
 
 /**
  * 获取社交页面列表数据

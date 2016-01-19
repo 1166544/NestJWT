@@ -1,6 +1,6 @@
-var util = require("../util/util");
-var conf = require("../conf/db");
-var mysql = require("mysql");
+var util    = require("../util/util");
+var conf    = require("../conf/db");
+var mysql   = require("mysql");
 
 /**
  * DB配置

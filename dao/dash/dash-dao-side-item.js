@@ -1,8 +1,8 @@
-﻿var mysql = require("mysql");
-var conf = require("../../conf/db");
-var code = require("../../conf/code");
-var util = require("../../util/util");
-var sql = require("./dash-sql-maping");
+﻿var mysql   = require("mysql");
+var conf    = require("../../conf/db");
+var code    = require("../../conf/code");
+var util    = require("../../util/util");
+var sql     = require("./dash-sql-maping");
 
 module.exports = {
     getSideItemData : getSideItemData

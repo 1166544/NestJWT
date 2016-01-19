@@ -1,24 +1,24 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var express         = require('express');
+var path            = require('path');
+var favicon         = require('serve-favicon');
+var logger          = require('morgan');
+var cookieParser    = require('cookie-parser');
+var bodyParser      = require('body-parser');
+var http            = require('http').Server(app);
+var io              = require('socket.io')(http);
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var cart = require('./routes/cart');
-var dash = require('./routes/dash');
-var profile = require('./routes/profile');
-var social = require('./routes/social');
-var socketAdapter = require('./sockets/socket-io-core');
-var socketConst = require('./sockets/socket-consts');
-var domain = require('./core/core-cross-domain');
-var error404 = require('./core/core-error-404');
-var errorDev = require('./core/core-error-dev');
-var errorDeploy = require('./core/core-error-deploy');
+var routes          = require('./routes/index');
+var users           = require('./routes/users');
+var cart            = require('./routes/cart');
+var dash            = require('./routes/dash');
+var profile         = require('./routes/profile');
+var social          = require('./routes/social');
+var socketAdapter   = require('./sockets/socket-io-core');
+var socketConst     = require('./sockets/socket-consts');
+var domain          = require('./core/core-cross-domain');
+var error404        = require('./core/core-error-404');
+var errorDev        = require('./core/core-error-dev');
+var errorDeploy     = require('./core/core-error-deploy');
 
 // 主程序
 var app = express();
@@ -43,13 +43,16 @@ var fs = require('fs');
 var accessLogStream = fs.createWriteStream(__dirname + '/log/access.log', {flags: 'a',  encoding:'utf8'});
 app.use(logger('combined', {stream: accessLogStream}));
 
-// 自定义cgi路径路由
+// 客户端路由
 app.use('/', routes);
 app.use('/p/users', users);
 app.use('/p/cart', cart);
 app.use('/p/dash', dash);
 app.use('/p/profile', profile);
 app.use('/p/social', social);
+
+// 服务端管理后台路由
+
 
 // catch 404 and forward to error handler
 app.use(error404.parseError);

@@ -1,6 +1,6 @@
-﻿var express = require('express');
-var router = express.Router();
-var profileDao = require('../dao/profile-dao');
+﻿var express     = require('express');
+var profileDao  = require('../dao/profile-dao');
+var router      = express.Router();
 
 module.exports = router;
 

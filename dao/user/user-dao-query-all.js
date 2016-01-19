@@ -1,10 +1,10 @@
-﻿var mysql = require("mysql");
-var conf = require("../../conf/db");
-var code = require("../../conf/code");
-var util = require("../../util/util");
-var sql = require("./user-sql-maping");
-var status = require('./user-login-status');
-var dao = require('../../dao/user-dao');
+﻿var mysql   = require("mysql");
+var conf    = require("../../conf/db");
+var code    = require("../../conf/code");
+var util    = require("../../util/util");
+var sql     = require("./user-sql-maping");
+var status  = require('./user-login-status');
+var dao     = require('../../dao/user-dao');
 
 // 建立连接
 var pool = mysql.createPool(util.extend({}, conf.mysql));

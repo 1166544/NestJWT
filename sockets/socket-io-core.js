@@ -1,4 +1,5 @@
 ﻿var socketConst = require('./socket-consts');
+var decotar     = require('./socket-decotar');
 
 module.exports = {
     connectSocket : connectSocket,
@@ -34,23 +35,26 @@ function connectSocket(socket) {
     function onMessage(msg) {
         
         // 构建客户端返回的对象
-        console.log(socketConst.ON_MESSAGE + ':' + msg);
+        // console.log(socketConst.ON_MESSAGE + ':' + msg);
         var obj = { time: getTime() };
         
-        // 判断是不是第一次连接，以第一条消息作为昵称
+        // 判断是不是第一次连接，记录ID和用户名
         if (!client.name) {
             
             onlineUserCount++;
-            client.name = msg;
-            obj[socketConst.CHAT_TEXT] = client.name;
-            obj[socketConst.CHAT_AUTHOR] = socketConst.CHAT_SYS;
-            obj[socketConst.CHAT_TYPE] = socketConst.CHAT_WELCOME;
-            obj[socketConst.CHAT_ONLINE] = onlineUserCount;
-            socket.name = client.name;
+            client.id                       = msg.message.id;
+            client.name                     = msg.message.name;
+            client.teamId                   = msg.message.teamId;
+            client.unionId                  = msg.message.unionId;
+            obj[socketConst.CHAT_TEXT]      = client.name;
+            obj[socketConst.CHAT_AUTHOR]    = socketConst.CHAT_SYS;
+            obj[socketConst.CHAT_TYPE]      = socketConst.CHAT_WELCOME;
+            obj[socketConst.CHAT_ONLINE]    = onlineUserCount;
+            socket.id                       = client.id;
             
             // 用户登录后设置socket.name， 当退出时用该标识删除该在线用户
-            if (!onlineUsers.hasOwnProperty(client.name)) {
-                onlineUsers[client.name] = client.name;
+            if (!onlineUsers.hasOwnProperty(client.id)) {
+                onlineUsers[client.id] = client.id;
             }
             
             // 当前在线用户集合
@@ -66,17 +70,80 @@ function connectSocket(socket) {
         } else {
             
             // 如果不是第一次聊天，则返回正常的聊天消息
-            obj[socketConst.CHAT_TEXT] = msg;
-            obj[socketConst.CHAT_AUTHOR] = client.name;
-            obj[socketConst.CHAT_TYPE] = socketConst.CHAT_MESSAGE;
-            console.log(client.name + ' 说:' + msg);
+            obj[socketConst.CHAT_TEXT]      = decotar.getMessage(msg);
+            obj[socketConst.CHAT_AUTHOR]    = client.id;
+            obj[socketConst.CHAT_NAME]      = client.name;
+            obj[socketConst.CHAT_TYPE]      = socketConst.CHAT_MESSAGE;
+            console.log(client.name + ' 说:' + msg.message);
             
-            // 发送给自己的消息，如果不想打印自己发送的消息，则注释掉该句。
-            socket.emit(socketConst.ON_MESSAGE, obj);
-            
-            // 向其他用户发送消息 
-            socket.broadcast.emit(socketConst.ON_MESSAGE, obj);
+            // CHANNEL类型决定了数据发往目的接收方是谁，CHANNEL可以在装配MSEEAGE过程中更改
+            switch (msg.channel) {
 
+                case socketConst.CHAT_HORN:                 // 大喇叭
+                case socketConst.CHAT_GLOBAL:               // 全服消息
+                case socketConst.BROADCAST_PROTOCOL:        // 一般通讯协议
+                case socketConst.BROADCAST_GLOBAL:          // 全服广播通知滚动跑马灯
+                    broadCastGlobal(obj, msg);
+                    break;
+
+                case socketConst.BROADCAST_PRIVATE:         // 只对某一用户广播通知跑马灯
+                case socketConst.CHAT_PRIVATE:              // 私聊
+                    broadCastPrivate(obj, msg);
+                    break;
+
+                case socketConst.CHAT_UNION:                // 公会聊天
+                    broadCastUnion(obj, msg);
+                    break;
+
+                case socketConst.CHAT_TEAM:                 // 组队聊天
+                    broadCastTeam(obj, msg);
+                    break;
+
+            }
+
+        }
+        
+        // 全局广播
+        function broadCastGlobal(obj, msg){
+            // socket.emit(socketConst.ON_MESSAGE, obj); // 发送给自已
+            socket.broadcast.emit(socketConst.ON_MESSAGE, obj);
+        }
+        
+        // 私聊
+        function broadCastPrivate(obj, msg){
+            if (onlineUsers[msg.message.toUserId] !== null) {
+                onlineUsers[msg.message.toUserId].socket.emit(obj);
+            }
+        }
+        
+        // 公会广播
+        function broadCastUnion(obj, msg){
+            var unionId = msg.message.unionId;
+            if (unionId) {
+                var key;
+                var user;
+                for (key in onlineUsers) {
+                    user = onlineUser[key];
+                    if (user.unionId === unionId) {
+                        user.socket.emit(obj);
+                    }
+                }
+            }
+        }
+        
+        // 组队广播
+        function broadCastTeam(){
+            var teamId = msg.message.teamId;
+            if (teamId) {
+                var key;
+                var user;
+                for (key in onlineUsers) {
+                    user = onlineUser[key];
+                    if (user.teamId === teamId) {
+                        user.socket.emit(obj);
+                    }
+                }
+            }
         }
 
     }
@@ -89,18 +156,16 @@ function connectSocket(socket) {
             onlineUserCount = 0;
         }
         
-        if (onlineUsers.hasOwnProperty(socket.name)) {
-            delete onlineUsers[client.name];
+        if (onlineUsers.hasOwnProperty(socket.id)) {
+            delete onlineUsers[client.id];
         }
         
-        var obj = {
-            time: getTime(),
-            author: socketConst.CHAT_SYS,
-            text: client.name,
-            type: socketConst.ON_DIS_CONNECT,
-            onlineUserCount: onlineUserCount,
-            onlineUsers: onlineUsers
-        };
+        var obj = { time: getTime() };
+        obj[socketConst.CHAT_TEXT]          = client.name;
+        obj[socketConst.CHAT_AUTHOR]        = socketConst.CHAT_SYS;
+        obj[socketConst.CHAT_TYPE]          = socketConst.ON_DIS_CONNECT;
+        obj[socketConst.CHAT_ONLINE]        = onlineUserCount;
+        obj[socketConst.CHAT_ONLINE_USER]   = onlineUsers;
         
         // 广播用户退出, 用户登录和退出都使用system事件播报
         socket.broadcast.emit(socketConst.CHAT_SYSTEM, obj);
@@ -115,8 +180,8 @@ function listenSocket() {
     console.log('Socket.io 服务启动... 端口:' + socketConst.SOCKET_PORT);
 }
 
-/** 获取服务器时间截 16:59:32 格式 */
+/** 获取服务器时间截 02/05 16:59:32 格式 */
 var getTime = function () {
     var date = new Date();
-    return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return date.getMonth() + "/" + date.getDate() + " " +date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 }

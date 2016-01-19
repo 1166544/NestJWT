@@ -1,5 +1,5 @@
-﻿var getListDao = require("./social/social-list");
-var getMinDao = require("./social/social-min");
+﻿var getListDao  = require("./social/social-list");
+var getMinDao   = require("./social/social-min");
 
 module.exports = {
 

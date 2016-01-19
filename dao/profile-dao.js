@@ -1,5 +1,5 @@
-﻿var profileDao = require('./profile/profile-dao-update');
-var userDao = require('./profile/profile-dao-user');
+﻿var profileDao  = require('./profile/profile-dao-update');
+var userDao     = require('./profile/profile-dao-user');
 
 module.exports = {
     

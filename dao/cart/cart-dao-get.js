@@ -1,8 +1,8 @@
-﻿var mysql = require("mysql");
-var conf = require("../../conf/db");
-var code = require("../../conf/code");
-var util = require("../../util/util");
-var sql = require("./cart-sql-maping");
+﻿var mysql   = require("mysql");
+var conf    = require("../../conf/db");
+var code    = require("../../conf/code");
+var util    = require("../../util/util");
+var sql     = require("./cart-sql-maping");
 
 // 建立连接
 var pool = mysql.createPool(util.extend({}, conf.mysql));

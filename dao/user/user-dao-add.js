@@ -1,9 +1,9 @@
-﻿var mysql = require("mysql");
-var conf = require("../../conf/db");
-var code = require("../../conf/code");
-var util = require("../../util/util");
-var sql = require("./user-sql-maping");
-var status = require('./user-login-status');
+﻿var mysql   = require("mysql");
+var conf    = require("../../conf/db");
+var code    = require("../../conf/code");
+var util    = require("../../util/util");
+var sql     = require("./user-sql-maping");
+var status  = require('./user-login-status');
 
 // 建立连接
 var pool = mysql.createPool(util.extend({}, conf.mysql));

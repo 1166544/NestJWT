@@ -1,6 +1,6 @@
 ﻿var express = require('express');
-var router = express.Router();
 var dashDao = require('../dao/dash-dao');
+var router  = express.Router();
 
 /**
  * 获取主页列表数据-中间

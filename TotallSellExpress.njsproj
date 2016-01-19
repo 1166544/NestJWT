@@ -78,7 +78,9 @@
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Compile Include="sockets\socket-consts.js" />
+    <Compile Include="sockets\socket-decotar.js" />
     <Compile Include="sockets\socket-io-core.js" />
+    <Compile Include="sockets\socket-protocol.js" />
     <Compile Include="util\util.js" />
     <Content Include=".gitattributes" />
     <Content Include="log\access.log" />

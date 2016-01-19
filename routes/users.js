@@ -1,6 +1,6 @@
 var express = require('express');
-var router = express.Router();
 var userDao = require('../dao/user-dao');
+var router  = express.Router();
 
 /* 监控更新用户信息输出 */
 router.get('/', function(req, res, next) {
