@@ -180,8 +180,14 @@ function listenSocket() {
     console.log('Socket.io 服务启动... 端口:' + socketConst.SOCKET_PORT);
 }
 
-/** 获取服务器时间截 02/05 16:59:32 格式 */
+/** 获取服务器时间截 2016/02/05 16:59 格式 */
 var getTime = function () {
     var date = new Date();
-    return date.getMonth() + "/" + date.getDate() + " " +date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    month = month + 1;
+    if (month < 10) {
+        month = "0" + month;
+    }
+    return year + "/" + month + "/" + date.getDate() + " " +date.getHours() + ":" + date.getMinutes();
 }
