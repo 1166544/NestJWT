@@ -2,9 +2,9 @@
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
-    "username": "jamescoonce",
-    "password": "",
-    "database": "NestTypeORMAuth",
+    "username": "apollouser",
+    "password": "apollopass",
+    "database": "apollodb",
     "entities": [
         "src/**/**.entity{.ts,.js}"
     ],

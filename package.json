@@ -1,10 +1,9 @@
 {
-  "name": "todo-jwt",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "nestjs-jwt",
+  "version": "1.0.0",
+  "description": "A Nest.js JWT framework",
+  "author": "James Liauw",
   "private": true,
-  "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
