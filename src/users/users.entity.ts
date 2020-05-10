@@ -13,40 +13,40 @@ import { UserRO } from './users.ro';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+	@PrimaryGeneratedColumn()
+	id: number;
 
-    @Column()
-    firstName: string;
+	@Column()
+	firstName: string;
 
-    @Column()
-    lastName: string;
+	@Column()
+	lastName: string;
 
-    @Column()
-    email: string;
+	@Column()
+	email: string;
 
-    @Column()
-    password: string;
+	@Column()
+	password: string;
 
-    @BeforeInsert()
-    async hashPassword() {
-      this.password = await bcrypt.hash(this.password, 10);
-    }
+	@BeforeInsert()
+	async hashPassword() {
+		this.password = await bcrypt.hash(this.password, 10);
+	}
 
-    async comparePassword(attempt: string): Promise<any> {
-      return await bcrypt.compare(attempt, this.password);
-    }
+	async comparePassword(attempt: string): Promise<any> {
+		return await bcrypt.compare(attempt, this.password);
+	}
 
-    toResponseObject(showToken = true): UserRO {
-      console.log(showToken);
-      const { id, firstName, lastName, email } = this;
-      const responseObject: UserRO = {
-        id,
-        firstName,
-        lastName,
-        email
-      };
+	toResponseObject(showToken = true): UserRO {
+		console.log(showToken);
+		const { id, firstName, lastName, email } = this;
+		const responseObject: UserRO = {
+			id,
+			firstName,
+			lastName,
+			email
+		};
 
-      return responseObject;
-    }
+		return responseObject;
+	}
 }
