@@ -8,16 +8,16 @@ import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
 
 @Module({
-  imports: [
-    UsersModule,
-    PassportModule,
-    JwtModule.register({
-      secret: 'Codebrains',
-      signOptions: { expiresIn: 3600 },
-    }),
-  ],
-  controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
-  exports: [AuthService, LocalStrategy, JwtStrategy],
+	imports: [
+		UsersModule,
+		PassportModule,
+		JwtModule.register({
+			secret: 'Codebrains',
+			signOptions: { expiresIn: 3600 }
+		})
+	],
+	controllers: [AuthController],
+	providers: [AuthService, LocalStrategy, JwtStrategy],
+	exports: [AuthService, LocalStrategy, JwtStrategy]
 })
 export class AuthModule {}
