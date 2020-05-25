@@ -4,7 +4,7 @@ import { AuthController } from './auth.controller';
 describe('Auth Controller', () => {
 	let controller: AuthController;
 
-	beforeEach(async () => {
+	beforeEach(async () => { 
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [AuthController]
 		}).compile();
