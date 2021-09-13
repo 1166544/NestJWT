@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
-  // swagger
+  // swagger api
   const options = new DocumentBuilder()
     .setTitle('Nest API')
     .setDescription('API description')
