@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const port = 3000;
+  const port = 9800;
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
