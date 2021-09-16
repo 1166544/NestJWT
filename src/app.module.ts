@@ -3,7 +3,7 @@ import { CatsModule } from './modules/cats/cats.module';
 import { CoreModule } from './modules/core/core.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from './modules/config/config.module';
+import { ConfigModule } from './modules/configuration/config.module';
 @Module({
   imports: [ConfigModule.register({ folder: './config' }), CoreModule, CatsModule],
   controllers: [AppController],

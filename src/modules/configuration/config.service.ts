@@ -10,9 +10,13 @@ export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor(@Inject(CONFIG_OPTIONS) options: ConfigOptions) {
+    // 读取本地配置
     const filePath = `${process.env.NODE_ENV || 'development'}.env`;
     const envFile = path.resolve(__dirname, '../../', options.folder, filePath);
     this.envConfig = dotenv.parse(fs.readFileSync(envFile));
+
+    // connect redis
+    
   }
 
   get(key: string): string {
