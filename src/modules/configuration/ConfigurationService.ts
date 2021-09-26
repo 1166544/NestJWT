@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
-import { CONFIG_OPTIONS } from './constants';
+import { CONFIG_OPTIONS } from './ConfigurationConstants';
 import { ConfigOptions, EnvConfig } from './interfaces';
 import cacheManager from 'cache-manager';
 import redisStore from 'cache-manager-redis-store';

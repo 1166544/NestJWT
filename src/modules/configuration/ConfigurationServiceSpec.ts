@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConfigService } from './config.service';
-import { CONFIG_OPTIONS } from './constants';
+import { ConfigService } from './ConfigurationService';
+import { CONFIG_OPTIONS } from './ConfigurationConstants';
 
 jest.mock('dotenv');
 jest.mock('fs');
