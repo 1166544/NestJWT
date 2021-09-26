@@ -64,6 +64,6 @@ export class ConfigService {
    * @memberOf ConfigService
    */
   public delCahe(key: string): boolean {
-    // hole
+    return false;
   }
 }
