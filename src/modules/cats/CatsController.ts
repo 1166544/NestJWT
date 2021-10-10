@@ -13,7 +13,7 @@ export class CatsController {
 
   @Post()
   @Roles('admin')
-  async create(@Body() createCatDto: CreateCatDto) {
+  async create(@Body() createCatDto: CreateCatDto): Promise<any> {
     this.catsService.create(createCatDto);
   }
 
@@ -26,7 +26,7 @@ export class CatsController {
   findOne(
     @Param('id', new ParseIntPipe())
     id: number,
-  ) {
+  ): any {
     // get by ID logic
   }
 }

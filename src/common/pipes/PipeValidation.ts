@@ -10,7 +10,8 @@ import { validate } from 'class-validator';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
-  async transform(value: any, metadata: ArgumentMetadata) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
     const { metatype } = metadata;
     if (!metatype || !this.toValidate(metatype)) {
       return value;
