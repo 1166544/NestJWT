@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { TransferController } from './TransferController';
 import { TransferService } from './TransferService';
 
@@ -9,6 +9,7 @@ import { TransferService } from './TransferService';
  * @class CatsModule
  */
 @Module({
+  imports: [CacheModule.register()],
   controllers: [TransferController],
   providers: [TransferService],
 })

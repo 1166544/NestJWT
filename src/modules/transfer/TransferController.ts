@@ -7,6 +7,13 @@ import { TransferService } from './TransferService';
 export class TransferController {
   constructor(private readonly transferService: TransferService) {}
 
+  /**
+   * visit: /mock-api/v1/users/test
+   * 
+   * @returns {Promise<any>} 
+   * 
+   * @memberOf TransferController
+   */
   @Get('users/test')
   async saveUserInfo(): Promise<any> {
     return this.transferService.findAll();
