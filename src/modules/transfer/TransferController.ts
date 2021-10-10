@@ -18,4 +18,17 @@ export class TransferController {
   async saveUserInfo(): Promise<any> {
     return this.transferService.findAll();
   }
+
+  /**
+   * TRANSFER Service
+   * visit: /mock-api/v1/transport
+   * 
+   * @returns {Promise<any>} 
+   * 
+   * @memberOf TransferController
+   */
+  @Get('transport')
+  async transportHandler(): Promise<any> {
+    return this.transferService.findAll();
+  }
 }
