@@ -4,8 +4,9 @@ import { CoreModule } from './modules/core/CoreModule';
 import { AppController } from './AppController';
 import { AppService } from './AppService';
 import { ConfigModule } from './modules/configuration/ConfigurationModule';
+import { TransferModule } from './modules/transfer/TransferModule';
 @Module({
-  imports: [ConfigModule.register({ folder: './config' }), CoreModule, CatsModule],
+  imports: [ConfigModule.register({ folder: './config' }), CoreModule, CatsModule, TransferModule],
   controllers: [AppController],
   providers: [AppService],
 })
